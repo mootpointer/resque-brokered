@@ -6,7 +6,7 @@ module Resque
       def reserve_with_broker interval = 5.0
         interval = interval.to_i
 
-          broker = Broker.new(redis)
+          broker = Broker.new(redis, @queues)
           begin
             queue, job = broker.pop
           rescue ThreadError
