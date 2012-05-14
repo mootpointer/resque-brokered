@@ -17,7 +17,7 @@ module Resque::Plugins::Brokered
     end
 
     def queues_regex
-      /^(?:#{@queues.join('|')}):.*/
+      /^(?:#{@queues.join('|')}).*/
     end
 
 
