@@ -20,7 +20,6 @@ module Resque::Plugins::Brokered
       /^(?:#{@queues.join('|')}).*/
     end
 
-
     def pop
       @redis.watch "#{@redis.namespace}:active_queues"
 
@@ -30,7 +29,6 @@ module Resque::Plugins::Brokered
         @redis.lpop "queue:#{queue_name}"
         add, value = @redis.exec
 
-        
         [queue_name, Resque.decode(value)]
       else
         raise ThreadError
