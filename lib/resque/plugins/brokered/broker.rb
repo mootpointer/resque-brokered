@@ -8,12 +8,16 @@ module Resque::Plugins::Brokered
     end
 
     def available_queues
-      queues = @redis.sdiff :queues, :active_queues
+      @redis.sdiff :queues, :active_queues
+    end
+
+    def filter_queues queues
       queues.select {|q| queues_regex.match q}
     end
 
     def get_queue
-      available_queues.shuffle.detect {|name| @redis.llen("queue:#{name}") > 0  }
+      queues = filter_queues(available_queues)
+      queues.shuffle.detect {|name| @redis.llen("queue:#{name}") > 0  }
     end
 
     def queues_regex
@@ -22,17 +26,13 @@ module Resque::Plugins::Brokered
 
     def pop
       @redis.watch "#{@redis.namespace}:active_queues"
+      return nil unless queue_name = get_queue
+      @redis.multi
+      @redis.sadd :active_queues, queue_name
+      @redis.lpop "queue:#{queue_name}"
+      add, value = @redis.exec
 
-      if queue_name = get_queue
-        @redis.multi
-        @redis.sadd :active_queues, queue_name
-        @redis.lpop "queue:#{queue_name}"
-        add, value = @redis.exec
-
-        [queue_name, Resque.decode(value)]
-      else
-        raise ThreadError
-      end
+      [queue_name, Resque.decode(value)]
     ensure
       @redis.unwatch
     end
