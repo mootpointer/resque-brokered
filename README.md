@@ -35,10 +35,30 @@ specify the first part of the queue name like so:
 
     QUEUES=big_process: rake resque:work
 
-Note the colon. It's the special sauce.
+Note the colon. It's the special sauce. The worker you just started will consume
+from all the queues which start with `big_process:`. If you start more workers with
+the same QUEUES environment variable, they will do the same, but they won't pick jobs
+up from queues which are already active.
 
 Normally named queues and queues without colons work as per usual. It's
 suggested that you don't use the catch-all `QUEUES=*` in conjunction
 with resque-brokered as that will ignore all the limiting and
 consistency work which resque-brokered brings.
 
+## Going forward
+Right now resque-brokered only supports one strategy, so it isn't really a broker
+in the truest sense. Moving forward, we would like to support additional strategies,
+such as weighted/priority queues, rate limiting and more advanced concurrency limitation.
+
+We also need to improve our test coverage and documentation
+
+## Contributors
+[James Sadler](http://github.com/freshtonic) and [Andrew Harvey](http://github.com/mootpointer)
+
+## Contributions
+You know the deal:   
+ - Fork the project
+ - Write code with tests
+ - Submit a pull request
+ - ???
+ - Profit.
