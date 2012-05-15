@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |s|
   s.name        = "resque-brokered"
-  s.version     = "0.1"
+  s.version     = "0.2"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Andrew Harvey", "James Sadler"]
   s.email       = ["andrew@mootpointer.com", "freshtonic@gmail.com"]
