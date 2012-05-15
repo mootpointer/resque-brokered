@@ -12,22 +12,12 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = ">= 1.3.6"
 
-  s.add_runtime_dependency 'resque', '~>1.0'
+  s.add_runtime_dependency 'resque', '~>1.20.0'
   s.add_runtime_dependency 'redis'
 
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~>2.0'
 
-
-  # If you have other dependencies, add them here
-  # s.add_dependency "another", "~> 1.2"
-
-  # If you need to check in files that aren't .rb files, add them here
   s.files        = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
   s.require_path = 'lib'
-
-  # If you need an executable, add it here
-  # s.executables = ["newgem"]
-
-  # If you have C extensions, uncomment this line
-  # s.extensions = "ext/extconf.rb"
 end

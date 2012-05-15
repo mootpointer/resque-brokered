@@ -1,10 +1,4 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-
-require 'rspec'
-require 'resque'
-require 'redis'
-require 'resque-brokered'
+Bundler.require :default, :development
 
 def test_redis
   Redis.new
