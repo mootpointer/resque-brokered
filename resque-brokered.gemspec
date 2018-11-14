@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = ">= 1.3.6"
 
-  s.add_runtime_dependency 'resque', '~>1.20'
+  s.add_runtime_dependency 'resque', '>= 1.20', '<= 2.0'
   s.add_runtime_dependency 'redis'
 
   s.add_development_dependency 'rake'
