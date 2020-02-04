@@ -1,13 +1,13 @@
 
 Gem::Specification.new do |s|
   s.name        = "resque-brokered"
-  s.version     = "0.2.1"
+  s.version     = "0.3.1"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Andrew Harvey", "James Sadler"]
   s.email       = ["andrew@mootpointer.com", "freshtonic@gmail.com"]
-  s.homepage    = "http://github.com/mootpointer/resque-brokered"
+  s.homepage    = "https://github.com/mootpointer/resque-brokered"
   s.summary     = "Resque plugin to add some broker logic to picking jobs up off queues"
-  s.description = "You're definitely going to want to replace a lot of this"
+  s.description = "Allow resque to serialize consumption from queues based on a key."
   s.license     = 'BSD'
 
   s.required_rubygems_version = ">= 1.3.6"
