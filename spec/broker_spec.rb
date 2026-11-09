@@ -39,6 +39,12 @@ describe Resque::Plugins::Brokered::Broker do
   end
 
   describe '#pop' do
+    it 'watches the unprefixed active_queues key (Redis::Namespace adds the namespace)' do
+      redis.stub :sdiff => []
+      redis.should_receive(:watch).with(:active_queues)
+      subject.pop
+    end
+
     context 'when there are no available queues' do
       before(:each) {redis.stub :sdiff => []}
       it 'returns nil' do

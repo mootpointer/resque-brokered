@@ -25,7 +25,7 @@ module Resque::Plugins::Brokered
     end
 
     def pop
-      @redis.watch "#{@redis.namespace}:active_queues"
+      @redis.watch :active_queues
       return nil unless queue_name = get_queue
       add, value = @redis.multi do |tx|
         tx.sadd :active_queues, queue_name
